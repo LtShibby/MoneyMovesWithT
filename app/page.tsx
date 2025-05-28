@@ -6,6 +6,15 @@ export default function Home() {
     <main>
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center bg-primary text-white">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/moneyMovesWithT-banner2.png"
+            alt="Background"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
         <div className="container relative z-10">
           <div className="max-w-3xl">
             <h1 className="heading-xl mb-6">
