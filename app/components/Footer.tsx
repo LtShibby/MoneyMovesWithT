@@ -112,9 +112,9 @@ const Footer = () => {
               Contact
             </h3>
             <ul className="space-y-2 text-gray-300">
-              <li>Email: contact@moneymoveswitht.com</li>
-              <li>Phone: (555) 123-4567</li>
-              <li>Location: Your City, State</li>
+              <li>Email: theoren2001@gmail.com</li>
+              <li>Phone: (315) 523-8118</li>
+              <li>Location: Tampa, FL</li>
             </ul>
           </div>
         </div>
