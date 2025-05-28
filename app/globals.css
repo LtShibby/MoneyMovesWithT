@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-montserrat: 'Montserrat', sans-serif;
+    --font-anton: 'Anton', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-primary antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto max-w-7xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium transition-colors rounded-lg;
+  }
+
+  .btn-primary {
+    @apply text-white bg-accent hover:bg-accent-light;
+  }
+
+  .btn-secondary {
+    @apply text-white bg-secondary hover:bg-secondary-light;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .heading-xl {
+    @apply text-4xl font-display md:text-5xl lg:text-6xl;
+  }
+
+  .heading-lg {
+    @apply text-3xl font-display md:text-4xl lg:text-5xl;
+  }
+
+  .heading-md {
+    @apply text-2xl font-display md:text-3xl;
+  }
+
+  .heading-sm {
+    @apply text-xl font-display md:text-2xl;
+  }
+} 
