@@ -18,6 +18,7 @@ const anton = Anton({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://moneymoveswitht.com'),
   title: 'Money Moves with T | Theoren Thorn - Life Insurance Advisor',
   description: 'Former MMA fighter turned life insurance advisor helping you secure your financial future with expert guidance and personalized solutions.',
   keywords: ['life insurance', 'financial planning', 'MMA fighter', 'Theoren Thorn', 'insurance advisor'],
@@ -26,6 +27,13 @@ export const metadata: Metadata = {
     description: 'Former MMA fighter turned life insurance advisor helping you secure your financial future.',
     type: 'website',
     locale: 'en_US',
+    url: 'https://moneymoveswitht.com',
+    siteName: 'Money Moves with T',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Money Moves with T | Theoren Thorn',
+    description: 'Former MMA fighter turned life insurance advisor helping you secure your financial future.',
   },
 }
 

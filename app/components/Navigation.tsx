@@ -1,16 +1,38 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const [isAboutOpen, setIsAboutOpen] = useState(false)
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false)
   const pathname = usePathname()
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  // Handle clicks outside the dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsAboutOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   const navItems = [
     { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
+    { 
+      name: 'About',
+      href: '/about',
+      subItems: [
+        { name: 'About Theoren', href: '/about' },
+        { name: 'Insurance Services', href: '/insurance' }
+      ]
+    },
     { name: 'Services', href: '/services' },
     { name: 'Testimonials', href: '/testimonials' },
     { name: 'Contact', href: '/contact' },
@@ -28,17 +50,56 @@ const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors ${
-                  pathname === item.href
-                    ? 'text-accent'
-                    : 'text-gray-600 hover:text-accent'
-                }`}
-              >
-                {item.name}
-              </Link>
+              item.subItems ? (
+                <div 
+                  key={item.name}
+                  className="relative"
+                  ref={dropdownRef}
+                >
+                  <button
+                    onClick={() => setIsAboutOpen(!isAboutOpen)}
+                    className={`text-sm font-medium transition-colors ${
+                      pathname === item.href || pathname === '/insurance'
+                        ? 'text-accent'
+                        : 'text-gray-600 hover:text-accent'
+                    }`}
+                  >
+                    {item.name}
+                  </button>
+                  {isAboutOpen && (
+                    <div className="absolute top-full left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                      <div className="py-1">
+                        {item.subItems.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            className={`block px-4 py-2 text-sm ${
+                              pathname === subItem.href
+                                ? 'text-accent bg-gray-50'
+                                : 'text-gray-600 hover:text-accent hover:bg-gray-50'
+                            }`}
+                            onClick={() => setIsAboutOpen(false)}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`text-sm font-medium transition-colors ${
+                    pathname === item.href
+                      ? 'text-accent'
+                      : 'text-gray-600 hover:text-accent'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              )
             ))}
             <Link
               href="/contact"
@@ -51,7 +112,10 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => {
+              setIsOpen(!isOpen)
+              setIsMobileAboutOpen(false)
+            }}
             aria-label="Toggle menu"
           >
             <svg
@@ -77,18 +141,69 @@ const Navigation = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
-                    pathname === item.href
-                      ? 'text-accent bg-gray-50'
-                      : 'text-gray-600 hover:text-accent hover:bg-gray-50'
-                  }`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.name}
-                </Link>
+                item.subItems ? (
+                  <div key={item.name}>
+                    <button
+                      onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
+                      className={`w-full text-left px-3 py-2 rounded-md text-base font-medium ${
+                        pathname === item.href || pathname === '/insurance'
+                          ? 'text-accent bg-gray-50'
+                          : 'text-gray-600 hover:text-accent hover:bg-gray-50'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span>{item.name}</span>
+                        <svg
+                          className={`w-5 h-5 transition-transform ${
+                            isMobileAboutOpen ? 'rotate-180' : ''
+                          }`}
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </button>
+                    {isMobileAboutOpen && (
+                      <div className="pl-4 space-y-1 mt-1">
+                        {item.subItems.map((subItem) => (
+                          <Link
+                            key={subItem.name}
+                            href={subItem.href}
+                            className={`block px-3 py-2 rounded-md text-base font-medium ${
+                              pathname === subItem.href
+                                ? 'text-accent bg-gray-50'
+                                : 'text-gray-600 hover:text-accent hover:bg-gray-50'
+                            }`}
+                            onClick={() => {
+                              setIsOpen(false)
+                              setIsMobileAboutOpen(false)
+                            }}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`block px-3 py-2 rounded-md text-base font-medium ${
+                      pathname === item.href
+                        ? 'text-accent bg-gray-50'
+                        : 'text-gray-600 hover:text-accent hover:bg-gray-50'
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                )
               ))}
               <Link
                 href="/contact"
