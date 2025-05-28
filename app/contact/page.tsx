@@ -48,22 +48,23 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     try {
-      // Here you would typically send the form data to your backend
-      console.log('Form submitted:', formData)
-      // Reset form after successful submission
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
-        tier: tier,
-        event: event
-      })
+      const calendlyUrl = new URL('https://calendly.com/wozniamj01/introduction-call')
+
+      // Add required fields
+      calendlyUrl.searchParams.set('name', formData.name)
+      calendlyUrl.searchParams.set('email', formData.email)
+      
+      // Add custom fields
+      calendlyUrl.searchParams.set('a1', tier || formData.tier || 'Not Specified') // Insurance Plan
+      calendlyUrl.searchParams.set('a2', formData.phone) // Phone Number
+      calendlyUrl.searchParams.set('a3', formData.message) // Additional Information
+
+      // Redirect to Calendly
+      window.location.href = calendlyUrl.toString()
     } catch (error) {
-      console.error('Error submitting form:', error)
-    } finally {
+      console.error('Redirect failed:', error)
       setIsSubmitting(false)
     }
   }
@@ -157,7 +158,7 @@ export default function Contact() {
                   disabled={isSubmitting}
                   className="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-accent hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Sending...' : 'Schedule Your Call'}
+                  {isSubmitting ? 'Redirecting...' : 'Schedule Your Call'}
                 </button>
               </div>
             </form>
