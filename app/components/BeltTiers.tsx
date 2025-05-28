@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 
 const beltTiers = [
   {
@@ -11,7 +12,8 @@ const beltTiers = [
       "Basic insurance education",
       "Family risk assessment"
     ],
-    cta: "Start for Free"
+    cta: "Start for Free",
+    calendlyEvent: "white-belt-consultation"
   },
   {
     name: "Blue Belt: Protection Plan",
@@ -21,7 +23,8 @@ const beltTiers = [
       "Budget-friendly monthly premiums",
       "Short-term financial coverage"
     ],
-    cta: "Book This Plan"
+    cta: "Book This Plan",
+    calendlyEvent: "blue-belt-consultation"
   },
   {
     name: "Brown Belt: Wealth Builder",
@@ -31,7 +34,8 @@ const beltTiers = [
       "Flexible premium structure",
       "Market-linked growth potential"
     ],
-    cta: "Build My Wealth"
+    cta: "Build My Wealth",
+    calendlyEvent: "brown-belt-consultation"
   },
   {
     name: "Black Belt: Legacy Mastery",
@@ -41,7 +45,8 @@ const beltTiers = [
       "Guaranteed lifetime growth",
       "Generational wealth planning"
     ],
-    cta: "Secure My Legacy"
+    cta: "Secure My Legacy",
+    calendlyEvent: "black-belt-consultation"
   }
 ]
 
@@ -109,7 +114,8 @@ export default function BeltTiers() {
                   ))}
                 </ul>
               </div>
-              <button
+              <Link
+                href={`/contact?tier=${encodeURIComponent(tier.name)}&event=${tier.calendlyEvent}`}
                 className={`btn w-full font-semibold py-2 px-4 rounded transition-all duration-300
                   ${index === 0 ? 'bg-white text-black hover:bg-gray-200' : ''}
                   ${index === 1 ? 'bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:opacity-90' : ''}
@@ -118,7 +124,7 @@ export default function BeltTiers() {
                 `}
               >
                 {tier.cta}
-              </button>
+              </Link>
             </motion.div>
           ))}
         </div>
