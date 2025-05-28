@@ -1,4 +1,19 @@
+'use client'
+
 import Link from 'next/link'
+import BeltTiers from '../components/BeltTiers'
+import { motion, type Variants } from 'framer-motion'
+import { FaComments, FaLightbulb, FaClipboardCheck, FaRocket } from 'react-icons/fa'
+
+const fadeInUp: Variants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+}
+
+const fadeInDown: Variants = {
+  initial: { opacity: 0, y: -20 },
+  animate: { opacity: 1, y: 0 },
+}
 
 export default function Services() {
   return (
@@ -14,6 +29,9 @@ export default function Services() {
           </div>
         </div>
       </section>
+
+      {/* Belt Tier System */}
+      <BeltTiers />
 
       {/* Services Overview */}
       <section className="section">
@@ -56,23 +74,45 @@ export default function Services() {
       </section>
 
       {/* Process Section */}
-      <section className="section bg-gray-50">
+      <section className="section bg-gradient-to-r from-gray-50 via-white to-gray-50">
         <div className="container">
-          <h2 className="heading-lg text-center mb-12">How We Work Together</h2>
-          <div className="grid md:grid-cols-4 gap-8">
+          <motion.div
+            variants={fadeInDown}
+            initial="initial"
+            animate="animate"
+            className="text-center mb-12"
+          >
+            <h2 className="heading-lg mb-2">Your Financial Training Sequence</h2>
+            <p className="text-center text-gray-600 max-w-2xl mx-auto">
+              Every great fighter needs a great corner. Here's how we coach you through the process.
+            </p>
+          </motion.div>
+          <div className="grid md:grid-cols-4 gap-8 relative">
             {process.map((step, index) => (
-              <div key={step.title} className="relative">
-                <div className="text-center">
-                  <div className="w-12 h-12 mx-auto mb-4 bg-accent text-white rounded-full flex items-center justify-center text-xl font-display">
-                    {index + 1}
+              <motion.div
+                key={step.title}
+                variants={fadeInUp}
+                initial="initial"
+                animate="animate"
+                transition={{ delay: index * 0.1 }}
+                className="relative"
+              >
+                <div className="text-center transition-transform duration-500 ease-out hover:scale-105">
+                  <div className="w-16 h-16 mx-auto mb-6 bg-accent text-white rounded-full flex items-center justify-center text-xl relative z-10">
+                    {index === 0 && <FaComments className="w-6 h-6" />}
+                    {index === 1 && <FaLightbulb className="w-6 h-6" />}
+                    {index === 2 && <FaClipboardCheck className="w-6 h-6" />}
+                    {index === 3 && <FaRocket className="w-6 h-6" />}
                   </div>
-                  <h3 className="heading-sm mb-2">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
+                  <h3 className="heading-sm mb-3 font-bold">{step.title}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{step.description}</p>
                 </div>
+
+                {/* Connector Line */}
                 {index < process.length - 1 && (
-                  <div className="hidden md:block absolute top-6 left-full w-full h-0.5 bg-accent" />
+                  <div className="hidden md:block absolute top-8 left-full transform -translate-x-1/2 w-12 h-0.5 bg-accent z-0" />
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
