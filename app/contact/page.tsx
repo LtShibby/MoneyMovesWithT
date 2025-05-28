@@ -50,7 +50,7 @@ export default function Contact() {
     setIsSubmitting(true)
 
     try {
-      const calendlyUrl = new URL('https://calendly.com/wozniamj01/introduction-call')
+      const calendlyUrl = new URL('https://calendly.com/theoren2001/30min')
 
       // Add required fields
       calendlyUrl.searchParams.set('name', formData.name)
