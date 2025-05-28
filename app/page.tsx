@@ -17,15 +17,15 @@ export default function Home() {
         </div>
         <div className="container relative z-10">
           <div className="max-w-3xl">
-            <h1 className="heading-xl mb-6">
-              From the Cage to Your Financial Future
-            </h1>
-            <p className="text-xl mb-8">
-              Former MMA fighter turned life insurance advisor, helping you make the right money moves for your future.
-            </p>
-            <Link href="/contact" className="btn btn-primary">
-              Book a Free Insurance Call
-            </Link>
+          <h1 className="heading-xl mb-6">
+            Train for Your Financial Future
+          </h1>
+          <p className="text-xl mb-8">
+            Professional MMA fighter and licensed life insurance advisor, Theoren helps you build wealth and protect your legacy — one smart move at a time.
+          </p>
+          <Link href="/contact" className="btn btn-primary">
+            Book a Free Insurance Call
+          </Link>
           </div>
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80" />
@@ -52,7 +52,9 @@ export default function Home() {
       {/* Testimonials Preview */}
       <section className="section bg-gray-50">
         <div className="container">
-          <h2 className="heading-lg text-center mb-12">What My Clients Say</h2>
+        <h2 className="heading-lg text-center mb-12">
+          What Fighters in Finance Say
+        </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial) => (
               <div key={testimonial.name} className="p-6 bg-white rounded-lg shadow-sm">
@@ -82,15 +84,15 @@ export default function Home() {
 const services = [
   {
     title: 'Indexed Universal Life',
-    description: 'Build wealth while protecting your loved ones with flexible premium payments and potential market-linked growth.',
+    description: 'Train your money to grow and protect — with flexible premiums and market-tied gains. Built for those who play the long game.',
   },
   {
     title: 'Whole Life Insurance',
-    description: 'Lifetime coverage with guaranteed cash value growth and fixed premiums that never increase.',
+    description: 'Lock in lifetime coverage with guaranteed growth and fixed premiums. No surprises — just solid fundamentals.',
   },
   {
     title: 'Term Life Insurance',
-    description: 'Affordable protection for a specific period, perfect for covering temporary needs like mortgages or education.',
+    description: 'Short-term protection that punches above its weight. Cover your key financial risks like mortgage or college costs, without breaking the bank.',
   },
 ]
 
