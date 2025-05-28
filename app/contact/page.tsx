@@ -56,7 +56,7 @@ function ContactForm() {
     setIsSubmitting(true)
 
     try {
-      const calendlyUrl = new URL('https://calendly.com/theoren2001/30min')
+      const calendlyUrl = new URL('https://calendly.com/thor-moneymoveswitht/30min')
 
       // Add required fields
       calendlyUrl.searchParams.set('name', formData.name)
