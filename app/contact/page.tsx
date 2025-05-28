@@ -188,8 +188,8 @@ export default function Contact() {
                 </p>
                 <p className="text-gray-600">
                   <strong>Email:</strong>{' '}
-                  <a href="mailto:theoren2001@gmail.com" className="text-accent hover:text-accent-dark">
-                    theoren2001@gmail.com
+                  <a href="mailto:thor@moneymoveswitht.com" className="text-accent hover:text-accent-dark">
+                    thor@moneymoveswitht.com
                   </a>
                 </p>
                 <div className="flex space-x-4 mt-6">

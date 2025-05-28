@@ -85,7 +85,7 @@ const Footer = () => {
               Contact
             </h3>
             <ul className="space-y-2 text-gray-300">
-              <li>Email: <a href="mailto:theoren2001@gmail.com" className="hover:text-white">theoren2001@gmail.com</a></li>
+              <li>Email: <a href="mailto:thor@moneymoveswitht.com" className="hover:text-white">thor@moneymoveswitht.com</a></li>
               <li>Phone: <a href="tel:315-523-8118" className="hover:text-white">(315) 523-8118</a></li>
               <li>Location: Tampa, FL</li>
             </ul>
