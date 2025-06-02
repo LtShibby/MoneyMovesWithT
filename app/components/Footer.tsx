@@ -47,7 +47,7 @@ const Footer = () => {
                 alt="Money Moves with T"
                 width={200}
                 height={50}
-                className="h-16 w-auto"
+                className="h-36 w-auto"
               />
             </div>
             <p className="text-gray-300 mb-4">
