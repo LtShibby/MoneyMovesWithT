@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -39,12 +40,18 @@ const Navigation = () => {
   ]
 
   return (
-    <nav className="fixed w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+    <nav className="fixed w-full bg-black backdrop-blur-sm z-50 shadow-md">
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-display">
-            Money Moves with T
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/mmwt-logo.jpg"
+              alt="Money Moves with T"
+              width={150}
+              height={40}
+              className="h-16 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}

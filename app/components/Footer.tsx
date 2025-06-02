@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Footer = () => {
   const socialLinks = [
@@ -40,7 +41,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
-            <h2 className="text-2xl font-display mb-4">Money Moves with T</h2>
+            <div className="mb-4">
+              <Image
+                src="/images/mmwt-logo.jpg"
+                alt="Money Moves with T"
+                width={200}
+                height={50}
+                className="h-16 w-auto"
+              />
+            </div>
             <p className="text-gray-300 mb-4">
               Helping you make the right financial decisions for your future.
             </p>
