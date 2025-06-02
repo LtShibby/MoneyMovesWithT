@@ -49,7 +49,7 @@ const Navigation = () => {
               alt="Money Moves with T"
               width={40}
               height={40}
-              className="h-12 w-auto"
+              className="h-16 w-auto"
             />
           </Link>
 
