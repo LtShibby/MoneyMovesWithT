@@ -12,7 +12,6 @@ const Navigation = () => {
   const pathname = usePathname()
   const dropdownRef = useRef<HTMLDivElement>(null)
 
-  // Handle clicks outside the dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -26,7 +25,7 @@ const Navigation = () => {
 
   const navItems = [
     { name: 'Home', href: '/' },
-    { 
+    {
       name: 'About',
       href: '/about',
       subItems: [
@@ -40,17 +39,17 @@ const Navigation = () => {
   ]
 
   return (
-    <nav className="fixed w-full bg-black backdrop-blur-sm z-50 shadow-md">
-      <div className="container">
+    <nav className="fixed w-full bg-black text-white backdrop-blur-sm z-50 shadow-md">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src="/images/mmwt-logo.jpg"
               alt="Money Moves with T"
-              width={150}
+              width={40}
               height={40}
-              className="h-16 w-auto"
+              className="h-12 w-auto"
             />
           </Link>
 
@@ -58,33 +57,40 @@ const Navigation = () => {
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               item.subItems ? (
-                <div 
-                  key={item.name}
-                  className="relative"
-                  ref={dropdownRef}
-                >
+                <div key={item.name} className="relative" ref={dropdownRef}>
                   <button
                     onClick={() => setIsAboutOpen(!isAboutOpen)}
-                    className={`text-sm font-medium transition-colors ${
-                      pathname === item.href || pathname === '/insurance'
+                    className={`text-sm font-medium transition-colors flex items-center gap-1 ${
+                      pathname === '/about' || pathname === '/insurance'
                         ? 'text-accent'
-                        : 'text-gray-600 hover:text-accent'
+                        : 'text-gray-300 hover:text-accent'
                     }`}
                   >
                     {item.name}
+                    <svg
+                      className={`w-4 h-4 transition-transform ${
+                        isAboutOpen ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M19 9l-7 7-7-7" />
+                    </svg>
                   </button>
                   {isAboutOpen && (
-                    <div className="absolute top-full left-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    <div className="absolute top-full left-0 mt-2 w-48 rounded-md shadow-lg bg-gray-900 ring-1 ring-white ring-opacity-10">
                       <div className="py-1">
                         {item.subItems.map((subItem) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}
-                            className={`block px-4 py-2 text-sm ${
-                              pathname === subItem.href
-                                ? 'text-accent bg-gray-50'
-                                : 'text-gray-600 hover:text-accent hover:bg-gray-50'
-                            }`}
+                            className={`block px-4 py-2 text-sm ${pathname === subItem.href
+                              ? 'text-white bg-accent font-semibold'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}
                             onClick={() => setIsAboutOpen(false)}
                           >
                             {subItem.name}
@@ -98,27 +104,22 @@ const Navigation = () => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`text-sm font-medium transition-colors ${
-                    pathname === item.href
-                      ? 'text-accent'
-                      : 'text-gray-600 hover:text-accent'
-                  }`}
+                  className={`text-sm font-medium transition-colors ${pathname === item.href
+                    ? 'text-white font-semibold border-b-2 border-accent'
+                    : 'text-gray-300 hover:text-white hover:border-b-2 hover:border-gray-500'}`}
                 >
                   {item.name}
                 </Link>
               )
             ))}
-            <Link
-              href="/contact"
-              className="btn btn-primary"
-            >
+            <Link href="/contact" className="btn btn-primary">
               Book a Call
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-white"
             onClick={() => {
               setIsOpen(!isOpen)
               setIsMobileAboutOpen(false)
@@ -145,25 +146,21 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden">
+          <div className="md:hidden bg-black text-white">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => (
                 item.subItems ? (
                   <div key={item.name}>
                     <button
                       onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
-                      className={`w-full text-left px-3 py-2 rounded-md text-base font-medium ${
-                        pathname === item.href || pathname === '/insurance'
-                          ? 'text-accent bg-gray-50'
-                          : 'text-gray-600 hover:text-accent hover:bg-gray-50'
-                      }`}
+                      className={`w-full text-left px-3 py-2 rounded-md text-base font-medium ${pathname === item.href
+                        ? 'text-white font-semibold border-b-2 border-accent'
+                        : 'text-gray-300 hover:text-white hover:border-b-2 hover:border-gray-500'}`}
                     >
                       <div className="flex items-center justify-between">
                         <span>{item.name}</span>
                         <svg
-                          className={`w-5 h-5 transition-transform ${
-                            isMobileAboutOpen ? 'rotate-180' : ''
-                          }`}
+                          className={`w-5 h-5 transition-transform ${isMobileAboutOpen ? 'rotate-180' : ''}`}
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -181,11 +178,9 @@ const Navigation = () => {
                           <Link
                             key={subItem.name}
                             href={subItem.href}
-                            className={`block px-3 py-2 rounded-md text-base font-medium ${
-                              pathname === subItem.href
-                                ? 'text-accent bg-gray-50'
-                                : 'text-gray-600 hover:text-accent hover:bg-gray-50'
-                            }`}
+                            className={`block px-3 py-2 rounded-md text-base font-medium ${pathname === subItem.href
+                              ? 'text-white bg-accent font-semibold'
+                              : 'text-gray-300 hover:text-white hover:bg-gray-800'}`}
                             onClick={() => {
                               setIsOpen(false)
                               setIsMobileAboutOpen(false)
@@ -201,11 +196,9 @@ const Navigation = () => {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`block px-3 py-2 rounded-md text-base font-medium ${
-                      pathname === item.href
-                        ? 'text-accent bg-gray-50'
-                        : 'text-gray-600 hover:text-accent hover:bg-gray-50'
-                    }`}
+                    className={`block px-3 py-2 rounded-md text-base font-medium ${pathname === item.href
+                      ? 'text-white font-semibold border-b-2 border-accent'
+                      : 'text-gray-300 hover:text-white hover:border-b-2 hover:border-gray-500'}`}
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}
@@ -227,4 +220,4 @@ const Navigation = () => {
   )
 }
 
-export default Navigation 
+export default Navigation
